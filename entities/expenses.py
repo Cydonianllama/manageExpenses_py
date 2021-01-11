@@ -1,8 +1,22 @@
 class expenses:
-    def __init__(self,name,products,services):
-        name = name
-        products = products
-        services = services
-    def getTotal(self):
-        hola = 's'
-        return hola
+	#expenses atts
+	idExpenses
+	reviewDate
+	expenseItems#an array
+	#expenses items atts
+	idProduct
+	idService
+	price
+	quantity
+	paymentMethod
+	measurementSytem
+	description
+	dateExpense
+	aproxDateExpenseRangeFirst
+	aproxDateExpenseRangeLast
+	TypeNecesity
+    def __init__(self,idExpenses,reviewDate,expenseItems):
+    	self.idExpenses = idExpenses
+    	self.reviewDate = reviewDate
+    	self.expenseItems = expenseItems
+    def addItem(self,idProduct,idService,price,quantity,paymentMethod,measurementSytem,description,dateExpense,aproxDateExpenseRangeLast,aproxDateExpenseRangeFirst,TypeNecesity):

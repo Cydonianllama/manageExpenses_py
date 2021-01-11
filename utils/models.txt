@@ -1,0 +1,66 @@
+products
+	idProduct
+	nameProduct
+	description
+	averagePrices
+	category
+
+	averagePrice
+		idAveragePrice
+		idLocation
+		price
+
+		location
+			idLocation
+			namelocation
+			description
+
+services
+	idProduct
+	nameServices
+	description
+	averagePrices
+	category
+
+	averagePrice
+		idAveragePrice
+		idLocation
+		price
+
+		location
+			idLocation
+			namelocation
+			description
+
+expenses
+	idExpenses
+	reviewDate
+	expenseItems
+
+	expenseItem
+		idProduct
+		idService
+		price
+		quantity
+		paymentMethod
+		measurementSytem
+		description
+		dateExpense
+		aproxDateExpenseRangeFirst
+		aproxDateExpenseRangeLast
+		TypeNecesity
+
+user
+	idUser
+	fullname
+	dateBirthdate
+	username
+	password
+
+	logUser
+		idLogUser
+		idUser
+		dateLog
+		descriptionLog
+
+

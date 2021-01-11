@@ -1,4 +1,9 @@
-from tkinter import Label,Entry,Button,StringVar
+#GUI modules
+from tkinter import Label,Entry,Button,StringVar,LabelFrame
+from tkinter import scrolledtext as st
+import tkinter as tk
+from tkinter import ttk
+#for partial function
 from functools import partial
 
 # my own modules
@@ -6,56 +11,70 @@ from controller.expenses import *
 
 
 #pcik up the data for the entries form
-def getData(nameproduct_var,quantity_var,cost_var,dateBuy_var,description_var):
+def getData(_nameProduct,description,_category):
     data = {
-        "nameproduct": nameproduct_var.get(),
-        "quantity": quantity_var.get(),
-        "cost": cost_var.get(),
-        "datebuy": dateBuy_var.get(),
-        "description": description_var.get()
+        "nameproduct": _nameProduct.get(),
+        "description": description.get("1.0",tk.END),
+        "category": _category.get(),
     }
     print(data)
 
 # action the button create product
 
-def actionCreateProduct(nameproduct_var, quantity_var, cost_var, dateBuy_var, description_var):
-    getData(nameproduct_var, quantity_var, cost_var, dateBuy_var, description_var)
+def actionCreateProduct(_nameProduct,description,_category):
+    getData(_nameProduct,description,_category)
     #createProduct(data)
 
 #main class for the dasboard expenses
 class dashboardExpenses:
     #x is a tk() class
+    def navBar(self):
+        print('still in development')
     def renderProductForm(self,x):
+        #######averagePrices#an array
+        #######category
+        ########average prices att
+        #######idAveragePrice
+        #######idLocation#an array
+        #######price
+        ########location att
+        #######idLocation
+        #######namelocation
+        #######description
         #variable for pickup the data
-        nameproduct_var = StringVar()
-        quantity_var = StringVar()
-        cost_var = StringVar()
-        dateBuy_var = StringVar()
-        description_var = StringVar()
-        Label(x, text = "Product Form").grid(pady = 5 , row = 0 , column = 0)
+        labelFrameProduct = LabelFrame(x, text="PRODUCT", pady = 25 )
+        labelFrameProduct.grid(pady = 5 , column = 0 , row = 0) 
+        _nameProduct = StringVar()
         #configurations grid
-        x.columnconfigure(1, weight=1)
-        x.columnconfigure(2, weight=1)
-        x.columnconfigure(3, weight=1)
-        x.columnconfigure(4, weight=1)
-        x.columnconfigure(5, weight=1)
-        x.rowconfigure(7, weight=1)
+        x.columnconfigure(0, weight=1)
+        x.columnconfigure(1, weight=2)
+        x.columnconfigure(2,weight =1)
+        x.columnconfigure(3,weight=2)
+        x.rowconfigure(6, weight=1)
         # the labels of the form
-        Label(x, text="name Product").grid(pady=5, row=1, column=0)
-        Label(x, text="quantity").grid(pady=5, row=2, column=0)
-        Label(x, text="cost").grid(pady=5,row = 3 , column=0)
-        Label(x, text="datebuy").grid(pady=5,row=4,column=0)
-        Label(x, text="description").grid(pady = 5 ,row = 5, column = 0)
+        # we can use justify=tk.LEFT -> instead sticky but in difernect circuntances
+        Label(labelFrameProduct, text="name Product" , width=16 ).grid(pady=5, row=1, column=0 ,sticky=tk.W)
+        Label(labelFrameProduct, text="category"  , width=16).grid(pady=5, row=2, column=0 , sticky=tk.W)
+        Label(labelFrameProduct, text="description"  , width=16).grid(pady=5,row = 3 , column=0 ,sticky=tk.W)
+
         #the entries of the form
-        nameproduct     = Entry(x, width=40 , textvariable = nameproduct_var).grid(padx=5, row=1, column=1)
-        quantity        = Entry(x, width=40 , textvariable = quantity_var).grid(padx=5, row=2, column=1)
-        cost            = Entry(x, width=40 , textvariable = cost_var).grid(padx=5, row=3, column=1)
-        dateBuy         = Entry(x, width=40 , textvariable = dateBuy_var).grid(padx=5, row=4, column=1)
-        description     = Entry(x, width=40 , textvariable = description_var).grid(padx=5, row=5, column=1)
+        nameproduct = Entry(labelFrameProduct, width=32 , textvariable = _nameProduct).grid(padx=5, row=1, column=1 ,sticky=tk.W)
+        category    = ttk.Combobox(labelFrameProduct, state="readonly",width=32)
+        category['values']= ("seleccionar","basicos","gusto","inesperado","probar", "otros")
+        category.current(0) #set the selected item
+        category .grid(padx=5, row=2, column=1 ,sticky=tk.W)
+        description = st.ScrolledText(labelFrameProduct,width=32,height=5)
+        description.grid(padx=5, row=3, column=1 ,sticky=tk.W)
         #for give the necesary parameters for the action in command button
-        actionBtn = partial(actionCreateProduct, nameproduct_var,
-                            quantity_var, cost_var, dateBuy_var, description_var)
+        actionBtn = partial(actionCreateProduct,_nameProduct,description,category)
         #btn action
-        Button(x, text="Create", width=50, command=actionBtn).grid(padx=10, pady=10, row=7, column=0, columnspan=2)
-    def renderServiceForm(self,x):
-        x.columnconfigure()
+        Button(labelFrameProduct, text="Create", width=16, command=actionBtn).grid(pady = 30,row=6, column=0 ,columnspan = 2)
+    def renderAveragesPricesForm(self,x):
+        labelFrameAP = LabelFrame(x,text ="Average Prices")
+        labelFrameAP.grid(pady = 5 ,column= 3 , row = 0)
+        Label(labelFrameAP,text="location", width=16).grid(pady=5,row=1,column=3 , sticky=tk.W)
+        Label(labelFrameAP,text="price", width = 16).grid(pady=5,row=2,column = 3 ,sticky=tk.W)
+        locationName = Entry(labelFrameAP, width = 20)
+        locationName.grid(pady = 5 ,row = 1 ,column = 4)
+        price = Entry(labelFrameAP,width = 20)
+        price.grid(pady = 5 , row = 2, column = 4)
