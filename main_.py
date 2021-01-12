@@ -3,12 +3,12 @@ from datetime import *
 #my own modules...
 from utils.tkinter import window
 from view.tableExpenses import *
-from utils.connection import db
+#from utils.connection import db
 
 #instances a global vaiables
 Dexpenses = dashboardExpenses()
 
-post = db.posts
+#post = db.posts
 
 dataTest = {
     "fullnames" : "erick manuel grandez mendoza",
@@ -19,8 +19,6 @@ dataTest = {
 def app():
     #post_id = post.insert_one(dataTest).inserted_id
     #print(post_id)
-    Dexpenses.renderProductForm(window)
-    Dexpenses.renderAveragesPricesForm(window)
+    Dexpenses.renderAll(window)
     window.mainloop()
-
 app()
