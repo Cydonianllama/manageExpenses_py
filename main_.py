@@ -2,12 +2,13 @@ from datetime import *
 
 #my own modules...
 from utils.tkinter import window
-from view.tableExpenses import *
+from view.products import *
+from view.location import *
 #from utils.connection import db
 
 #instances a global vaiables
-Dexpenses = dashboardExpenses()
-
+viewProduct = productsViews()
+viewLocation = locationView()
 #post = db.posts
 
 dataTest = {
@@ -19,6 +20,7 @@ dataTest = {
 def app():
     #post_id = post.insert_one(dataTest).inserted_id
     #print(post_id)
-    Dexpenses.renderAll(window)
+    #viewLocation.renderAll(window)
+    viewProduct.renderAll(window)
     window.mainloop()
 app()
