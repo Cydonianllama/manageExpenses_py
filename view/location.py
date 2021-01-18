@@ -45,12 +45,14 @@ class locationView:
 		#positioning Part
 		labelNamaLocation.grid(column= 0,row= 0)
 		labelDescription.grid(column= 0,row= 1)
-		nameLocation.grid(column= 1, row=0)
-		description.grid(column= 1, row = 1)
+		nameLocation.grid(column= 1, row=0,sticky= tk.W)
+		description.grid(column= 1, row = 1,sticky= tk.W)
 		btnAdd.grid(column = 0,columnspan = 2,row=3)
 		textField.pack(fill =tk.BOTH, side = tk.TOP , expand= True)
 
-	def renderAll(self,x):
-		self.renderForm(x)
-		self.renderMaintein(x)
-		print("render All")
+	# this method contain all the logic of the views for render 
+	def getFrameLocation(self,x):
+		FrameLocation = Frame(x)
+		self.renderForm(FrameLocation)
+		self.renderMaintein(FrameLocation)
+		return FrameLocation

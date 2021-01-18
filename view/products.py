@@ -60,13 +60,23 @@ class productsViews:
         btnCreate.grid(pady= 30,row= 6, column= 0 ,columnspan= 2)
         labelFrameProduct.pack(fill = tk.BOTH , side = tk.TOP , expand = False, padx=15) 
 
-    def tableKeep(self,x):
-        fameKeep = Frame(x)
-        labelFrameAP = LabelFrame(x,text= "KeepProducts")
-        Button(labelFrameAP,text= "editar", width=16)
-        Button(labelFrameAP,text= "eliminar", width=16)
+    def tableMaintein(self,x):
+        frameMaintein = Frame(x)
+        labelFrameAP = LabelFrame(frameMaintein,text= "KeepProducts")
+        btnEdit=    Button(labelFrameAP,text= "editar", width=16)
+        btnDelete=  Button(labelFrameAP,text= "eliminar", width=16)
 
-        print("table keep")
-    def renderAll(self,x):
-        apView(x)#partials for my forms
-        self.renderProductForm(x)
+        # positioning
+        btnEdit.grid(column= 0, row= 0)
+        btnDelete.grid(column= 1, row= 0)
+        labelFrameAP.pack()
+        frameMaintein.pack(fill= tk.BOTH, side= tk.RIGHT, padx= 15, expand= True) 
+
+    def getViewProduct(self,x):
+        frameProduct = ttk.Frame(x)
+        # partial of average price view (render Method)
+        apView(frameProduct)
+        # intern views of product UI
+        self.tableMaintein(frameProduct)
+        self.renderProductForm(frameProduct)
+        return frameProduct
